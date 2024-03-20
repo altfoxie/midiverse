@@ -1,0 +1,16 @@
+[package]
+name = "pianoverse-client"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures-util = "0.3.30"
+pianoverse-proto = { version = "0.1.0", path = "../pianoverse-proto" }
+prost = "0.12.3"
+thiserror = "1.0.58"
+tokio = { version = "1.36.0", features = ["full"] }
+tokio-tungstenite = { version = "0.21.0", features = [
+    "rustls-tls-native-roots",
+] }

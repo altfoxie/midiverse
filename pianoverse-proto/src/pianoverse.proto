@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package pianoverse;
+
+message ClientMessage {
+  enum EventType {
+    PING = 0;
+    ROOM = 1;
+    RENAME = 2;
+    CHAT = 3;
+    MOVE = 4;
+    MUTE = 5;
+    UNMUTE = 6;
+    KICK = 7;
+    PRESS = 8;
+    RELEASE = 9;
+    SUSTAIN = 10;
+    HEARTBEAT = 11;
+  }
+
+  EventType event = 1;
+
+  Room room = 3;
+  message Room {
+    string room = 1;
+    bool private = 2;
+  }
+
+  string rename = 4;
+  string chat = 5;
+
+  Move move = 6;
+
+  string mute = 7;
+  string unmute = 8;
+  string kick = 9;
+
+  Press press = 10;
+  Release release = 11;
+
+  bool sustain = 12;
+
+  Heartbeat heartbeat = 13;
+  message Heartbeat {}
+}
+
+message ServerMessage {
+  enum EventType {
+    PONG = 0;
+    CHAT = 1;
+    ROOMS = 2;
+    WELCOME = 3;
+    MOVE = 4;
+    PRESS = 5;
+    RELEASE = 6;
+    SUSTAIN = 7;
+    RENAME = 8;
+    JOIN = 9;
+    LEAVE = 10;
+    RATELIMIT = 11;
+  }
+
+  EventType event = 1;
+
+  Pong pong = 2;
+  message Pong {}
+
+  Chat chat = 3;
+  message Chat {
+    string id = 1;
+    string content = 2;
+    string name = 3;
+    string color = 4;
+  }
+
+  repeated Room rooms = 4;
+  message Room {
+    string room = 1;
+    uint32 count = 2;
+  }
+
+  Welcome welcome = 5;
+  message Welcome {
+    string id = 1;
+    string name = 2;
+    string color = 3;
+    string room = 4;
+    string owner = 5;
+    repeated Chat chat = 6;
+  }
+
+  Move move = 6;
+  Press press = 7;
+  Release release = 8;
+
+  Sustain sustain = 9;
+  message Sustain {
+    string id = 1;
+    bool enabled = 2;
+  }
+
+  Join rename = 10;
+  Join join = 11;
+  message Join {
+    string id = 1;
+    string name = 2;
+    string color = 3;
+    float x = 4;
+    float y = 5;
+  }
+
+  string leave = 12;
+
+  RateLimit rateLimit = 13;
+  message RateLimit {}
+}
+
+message Move {
+  string id = 1;
+  float x = 2;
+  float y = 3;
+}
+
+message Press {
+  string id = 1;
+  uint32 key = 2;
+  uint32 vel = 3;
+}
+
+message Release {
+  string id = 1;
+  uint32 key = 2;
+}
