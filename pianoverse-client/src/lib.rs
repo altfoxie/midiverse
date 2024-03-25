@@ -77,6 +77,18 @@ impl Client {
         .await
     }
 
+    // async fn update_profile(
+    //     &self,
+    //     profile: pianoverse_proto::Profile,
+    // ) -> Result<(), tungstenite::Error> {
+    //     self.send(pianoverse_proto::ClientMessage {
+    //         event: EventType::Profile.into(),
+    //         profile: Some(profile),
+    //         ..Default::default()
+    //     })
+    //     .await
+    // }
+
     pub async fn send_chat_message<T: Into<String>>(
         &self,
         text: T,

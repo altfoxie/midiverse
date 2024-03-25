@@ -6,7 +6,7 @@ message ClientMessage {
   enum EventType {
     PING = 0;
     ROOM = 1;
-    RENAME = 2;
+    PROFILE = 2;
     CHAT = 3;
     MOVE = 4;
     MUTE = 5;
@@ -27,7 +27,7 @@ message ClientMessage {
     bool private = 2;
   }
 
-  string rename = 4;
+  Profile profile = 4;
   string chat = 5;
 
   Move move = 6;
@@ -61,7 +61,7 @@ message ServerMessage {
     PRESS = 5;
     RELEASE = 6;
     SUSTAIN = 7;
-    RENAME = 8;
+    PROFILE = 8;
     JOIN = 9;
     LEAVE = 10;
     RATELIMIT = 11;
@@ -107,20 +107,23 @@ message ServerMessage {
     bool enabled = 2;
   }
 
-  Join rename = 10;
-  Join join = 11;
-  message Join {
-    string id = 1;
-    string name = 2;
-    string color = 3;
-    float x = 4;
-    float y = 5;
-  }
+  Profile profile = 10;
+  Profile join = 11;
 
   string leave = 12;
 
   RateLimit rateLimit = 13;
   message RateLimit {}
+}
+
+message Profile {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+  string sound = 4;
+  bool muted = 5;
+  float x = 6;
+  float y = 7;
 }
 
 message Move {
