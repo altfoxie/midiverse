@@ -51,7 +51,11 @@ impl Client {
         }
 
         let msg = match msg.unwrap()? {
-            tungstenite::Message::Binary(b) => b,
+            tungstenite::Message::Binary(b) => {
+                #[cfg(debug_assertions)]
+                eprintln!("received: {:?}", hex::encode(&b));
+                b
+            }
             _ => return Err(ReceiveError::UnexpectedMessage),
         };
         Ok(Some(pianoverse_proto::ServerMessage::decode(&msg[..])?))
