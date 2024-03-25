@@ -18,9 +18,10 @@ pub enum MidiEvent {
 }
 
 impl<'a> MidiPlayer<'a> {
-    pub fn load(bytes: &'a [u8]) -> Self {
-        let smf = Smf::parse(bytes).unwrap();
-        MidiPlayer { smf }
+    pub fn load(bytes: &'a [u8]) -> Result<Self, nodi::midly::Error> {
+        Ok(MidiPlayer {
+            smf: Smf::parse(bytes)?,
+        })
     }
 
     pub fn track_names(&self) -> Vec<String> {

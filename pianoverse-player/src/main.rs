@@ -26,7 +26,7 @@ async fn main() -> anyhow::Result<()> {
     let transpose = c.get_one::<String>("transpose").unwrap().parse::<i8>()?;
 
     let data = std::fs::read(input).context("Failed to read MIDI file")?;
-    let player = MidiPlayer::load(data.as_slice());
+    let player = MidiPlayer::load(data.as_slice()).context("Failed to load MIDI file")?;
     let track_idx: Vec<usize> = inquire::MultiSelect::new(
         "Select tracks to play",
         player
