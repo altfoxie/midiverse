@@ -23,7 +23,11 @@ async fn main() -> anyhow::Result<()> {
     let room = c.get_one::<String>("room").unwrap();
     let private = c.get_one::<bool>("private").unwrap();
     let input = c.get_one::<String>("input").unwrap();
-    let transpose = c.get_one::<String>("transpose").unwrap().parse::<i8>()?;
+    let transpose = c
+        .get_one::<String>("transpose")
+        .unwrap()
+        .parse::<i8>()
+        .unwrap_or(0);
 
     let data = std::fs::read(input).context("Failed to read MIDI file")?;
     let player = MidiPlayer::load(data.as_slice()).context("Failed to load MIDI file")?;
