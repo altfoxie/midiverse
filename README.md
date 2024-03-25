@@ -1,6 +1,6 @@
 # MIDIverse
 
-MIDI files player for [Pianoverse](https://pianoverse.net). Uses [nodi](https://github.com/insomnimus/nodi) powered by [midly](https://crates.io/crates/midly) to decode and MIDI files.
+MIDI files player for [Pianoverse](https://pianoverse.net). Uses [nodi](https://github.com/insomnimus/nodi) powered by [midly](https://crates.io/crates/midly) to decode and play MIDI files.
 
 ## Usage
 
