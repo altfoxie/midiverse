@@ -25,8 +25,7 @@ async fn main() -> anyhow::Result<()> {
     let input = c.get_one::<String>("input").unwrap();
     let transpose = c
         .get_one::<String>("transpose")
-        .unwrap()
-        .parse::<i8>()
+        .and_then(|s| s.parse::<i8>().ok())
         .unwrap_or(0);
 
     let data = std::fs::read(input).context("Failed to read MIDI file")?;
