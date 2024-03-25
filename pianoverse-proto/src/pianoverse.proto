@@ -16,6 +16,7 @@ message ClientMessage {
     RELEASE = 9;
     SUSTAIN = 10;
     HEARTBEAT = 11;
+    BAN = 12;
   }
 
   EventType event = 1;
@@ -42,6 +43,12 @@ message ClientMessage {
 
   Heartbeat heartbeat = 13;
   message Heartbeat {}
+
+  Ban ban = 14;
+  message Ban {
+    string id = 1;
+    uint32 hours = 2;
+  }
 }
 
 message ServerMessage {
@@ -85,8 +92,9 @@ message ServerMessage {
     string name = 2;
     string color = 3;
     string room = 4;
-    string owner = 5;
-    repeated Chat chat = 6;
+    string sound = 5;
+    string owner = 6;
+    repeated Chat chat = 7;
   }
 
   Move move = 6;
