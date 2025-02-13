@@ -16,3 +16,6 @@ Options:
   -t, --transpose <N>  Transpose MIDI notes for N semitones
   -h, --help           Print help
 ```
+
+## License
+MIT
